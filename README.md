@@ -1,46 +1,61 @@
-# Gutenberg-Books-API
+Gutenberg Books API
+A FastAPI-based REST API for accessing and filtering books from the Project Gutenberg dataset. Built for the Python Developer Internship assignment.
+🚀 Live Demo
 
-A FastAPI-based backend that exposes a REST API for accessing and filtering books from the Project Gutenberg dataset stored in a NeonDB (PostgreSQL-compatible) database.
+API URL: [Your deployed URL here]
+Interactive Documentation: [Your deployed URL]/docs
 
----
+## Assignment Requirements Completed
+- Core Features
 
-## 🚀 Features
+✅ All Filter Criteria: book_id, title, author, language, mime_type, topic
+✅ Pagination: 25 books per page with offset/limit support
+✅ Popularity Sorting: Results ordered by download count (descending)
+✅ Multiple Values: Support for comma-separated filter values (language=en,fr)
+✅ Case-Insensitive Search: Partial matching for title, author, and topic
+✅ JSON Response: Structured response with count and results array
 
-- Filter books by:
-  - `book_id`
-  - `title`
-  - `author`
-  - `language`
-  - `mime_type`
-  - `topic` (matches both subject and bookshelf)
-- Pagination support with `offset` and `limit` (returns 25 books per page by default)
-- Results ordered by `download_count` (descending)
-- Asynchronous database queries for high performance
-- OpenAPI docs auto-generated at `/docs`
+## API Response Format
+json{
+  "count": 150,
+  "results": [
+    {
+      "id": 11,
+      "title": "Alice's Adventures in Wonderland",
+      "author": "Carroll, Lewis",
+      "genre": "Fiction",
+      "language": "en",
+      "subjects": ["Children's stories", "Fantasy fiction"],
+      "bookshelves": ["Children's Literature"],
+      "download_links": [
+        {"format": "text/html", "url": "..."},
+        {"format": "application/pdf", "url": "..."}
+      ]
+    }
+  ]
+}
 
----
+## 🔧 Technology Stack
 
-## 🛠️ Tech Stack
+- FastAPI - Modern Python web framework
+- SQLAlchemy 2.0 (async) - Database ORM with async support
+- PostgreSQL (NeonDB) - Cloud-hosted database
+- Python 3.11+ - Latest Python version
 
-- **Python 3.11+**
-- **FastAPI** – Web framework
-- **SQLAlchemy 2.0 (async)** – ORM
-- **PostgreSQL (NeonDB)** – Cloud-hosted database
-- **asyncpg** – Async PostgreSQL driver
-- **Pydantic v2** – Data validation and serialization
+## 📋 API Usage Examples
+'''bash Basic search
+GET /books?limit=10
+# Filter by multiple criteria
+GET /books?language=en&topic=children&author=carroll
+# Multiple values per filter
+GET /books?language=en,fr&topic=child,infant
+# Pagination
+GET /books?limit=25&offset=50
 
----
 
-## 📦 Project Structure
-gutenberg_api/
-├── main.py # Main FastAPI app
-├── requirements.txt # Required dependencies
-├── .env # Environment variables (not included in version control)
-├── README.md # This file
-
-## 📄 Requirements
-
-Install dependencies:
-
-```bash
+🚀 Quick Setup
+bash'''
+git clone https://github.com/Aman140113/Gutenberg-Books-API.git
+cd Gutenberg-Books-API
 pip install -r requirements.txt
+uvicorn main:app --reload
