@@ -51,19 +51,19 @@ A FastAPI-based REST API for accessing and filtering books from the Project Gute
 
 ### API Usage Examples
 
-Basic search
+## Basic search
 ```
 GET /books?limit=10
 ```
-Filter by multiple criteria
+## Filter by multiple criteria
 ```
 GET /books?language=en&topic=children&author=carroll
 ```
-Multiple values per filter
+## Multiple values per filter
 ```
 GET /books?language=en,fr&topic=child,infant
 ```
-Pagination
+## Pagination
 ```
 GET /books?limit=25&offset=50
 ```
